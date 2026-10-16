@@ -99,12 +99,30 @@ flowchart TD
     ELD_N <-->|"90 km"| KKM
     KKM <-->|"55 km"| DEST
 
-    classDef startNode fill:#dbeafe,stroke:#1d4ed8,stroke-width:3px,color:#0f172a;
-    classDef goalNode fill:#dcfce7,stroke:#15803d,stroke-width:3px,color:#0f172a;
-    classDef transitNode fill:#f3f4f6,stroke:#4b5563,color:#0f172a;
+    %% Node styles
+    classDef startNode fill:#3b82f6,stroke:#1e3a8a,stroke-width:4px,color:#ffffff,font-weight:bold;
+    classDef goalNode fill:#22c55e,stroke:#14532d,stroke-width:4px,color:#ffffff,font-weight:bold;
+    classDef highlands fill:#fed7aa,stroke:#c2410c,stroke-width:2px,color:#431407;
+    classDef rift fill:#fecaca,stroke:#b91c1c,stroke-width:2px,color:#450a0a;
+    classDef lake fill:#a5f3fc,stroke:#0e7490,stroke-width:2px,color:#083344;
+    classDef junction fill:#fef08a,stroke:#a16207,stroke-width:2px,color:#422006;
+
     class DEPOT startNode;
     class DEST goalNode;
-    class THK,MRG,NYR,NYH_N,NVS,NKR,NRK,BMT,MSM,LDN,ELD_N,KRC,MHR,KSI_N,KKM transitNode;
+    class THK,MRG,NYR,NYH_N highlands;
+    class NVS,NKR,NRK,BMT,ELD_N,KRC rift;
+    class MSM,LDN junction;
+    class MHR,KSI_N,KKM lake;
+
+    %% Zone box styles
+    style Zone_CH fill:#fff7ed,stroke:#ea580c,stroke-width:2px,stroke-dasharray:5 3
+    style Zone_RV fill:#fef2f2,stroke:#dc2626,stroke-width:2px,stroke-dasharray:5 3
+    style Zone_LVB fill:#ecfeff,stroke:#0891b2,stroke-width:2px,stroke-dasharray:5 3
+
+    %% Edge colours: Highlands (orange), Rift Valley (red), Lake Basin (teal)
+    linkStyle 0,1,2,3 stroke:#ea580c,stroke-width:2px;
+    linkStyle 4,5,6,7,8,9 stroke:#dc2626,stroke-width:2px;
+    linkStyle 10,11,12,13,14,15,16,17,18,19,20,21 stroke:#0891b2,stroke-width:2px;
 ```
 
 ---
@@ -122,6 +140,23 @@ flowchart LR
     REG_NRB --> REG_RV["Rift Valley Transport Corridor"]
     REG_CH --> REG_RV
     REG_RV --> REG_LVB["Lake Victoria Basin Terminal Zone"]
+
+    %% Node styles
+    classDef nairobi fill:#3b82f6,stroke:#1e3a8a,stroke-width:3px,color:#ffffff,font-weight:bold;
+    classDef highlands fill:#fed7aa,stroke:#c2410c,stroke-width:2px,color:#431407;
+    classDef rift fill:#fecaca,stroke:#b91c1c,stroke-width:2px,color:#450a0a;
+    classDef lake fill:#22c55e,stroke:#14532d,stroke-width:3px,color:#ffffff,font-weight:bold;
+
+    class REG_NRB nairobi;
+    class REG_CH highlands;
+    class REG_RV rift;
+    class REG_LVB lake;
+
+    %% Edge styles (by order of definition)
+    linkStyle 0 stroke:#ea580c,stroke-width:2px;
+    linkStyle 1 stroke:#dc2626,stroke-width:2px;
+    linkStyle 2 stroke:#dc2626,stroke-width:2px;
+    linkStyle 3 stroke:#0891b2,stroke-width:3px;
 ```
 
 #### Tier 2: Town-Level Micro Refinement
@@ -135,6 +170,24 @@ flowchart LR
     T_MSM -->|"24 km"| T_LDN["Londiani (236)"]
     T_LDN -->|"75 km"| T_MHR["Muhoroni (311)"]
     T_MHR -->|"45 km"| T_DEST["Kisumu (356)"]
+
+    %% Node styles
+    classDef start fill:#3b82f6,stroke:#1e3a8a,stroke-width:4px,color:#ffffff,font-weight:bold;
+    classDef goal fill:#22c55e,stroke:#14532d,stroke-width:4px,color:#ffffff,font-weight:bold;
+    classDef rift fill:#fecaca,stroke:#b91c1c,stroke-width:2px,color:#450a0a;
+    classDef junction fill:#fef08a,stroke:#a16207,stroke-width:2px,color:#422006;
+    classDef lake fill:#a5f3fc,stroke:#0e7490,stroke-width:2px,color:#083344;
+
+    class T_NRB start;
+    class T_DEST goal;
+    class T_NVS,T_NKR rift;
+    class T_MSM,T_LDN junction;
+    class T_MHR lake;
+
+    %% Edge styles (thick, since this is the optimal path)
+    linkStyle 0,1,2 stroke:#dc2626,stroke-width:3px;
+    linkStyle 3 stroke:#ca8a04,stroke-width:3px;
+    linkStyle 4,5 stroke:#0891b2,stroke-width:3px;
 ```
 
 ---
@@ -174,12 +227,34 @@ flowchart TD
     BRANCH_BMT --> BRANCH_KSI["Kisii (285 km)"]
     BRANCH_KSI --> GOAL_SOUTHWEST(("Kisumu Terminal (400 km)"))
 
-    classDef startStyle fill:#dbeafe,stroke:#1d4ed8,stroke-width:2px,color:#0f172a;
-    classDef goalStyle fill:#dcfce7,stroke:#15803d,stroke-width:2px,color:#0f172a;
-    classDef pruneStyle fill:#fee2e2,stroke:#b91c1c,stroke-dasharray:5 5,color:#0f172a;
+    %% Node styles
+    classDef startStyle fill:#3b82f6,stroke:#1e3a8a,stroke-width:4px,color:#ffffff,font-weight:bold;
+    classDef optimalGoal fill:#22c55e,stroke:#14532d,stroke-width:4px,color:#ffffff,font-weight:bold;
+    classDef otherGoal fill:#bbf7d0,stroke:#15803d,stroke-width:2px,color:#14532d;
+    classDef highlands fill:#fed7aa,stroke:#c2410c,stroke-width:2px,color:#431407;
+    classDef rift fill:#fecaca,stroke:#b91c1c,stroke-width:2px,color:#450a0a;
+    classDef junction fill:#fef08a,stroke:#a16207,stroke-width:2px,color:#422006;
+    classDef lake fill:#a5f3fc,stroke:#0e7490,stroke-width:2px,color:#083344;
+    classDef pruneStyle fill:#f3f4f6,stroke:#dc2626,stroke-width:2px,stroke-dasharray:5 5,color:#7f1d1d;
+
     class ROOT startStyle;
-    class GOAL_PRIMARY,GOAL_NORTHERN,GOAL_SOUTHERN,GOAL_SOUTHWEST goalStyle;
+    class GOAL_PRIMARY optimalGoal;
+    class GOAL_NORTHERN,GOAL_SOUTHERN,GOAL_SOUTHWEST otherGoal;
+    class BRANCH_THK,BRANCH_MRG,BRANCH_NYR,BRANCH_NYH highlands;
+    class BRANCH_NVS,BRANCH_NKR,BRANCH_NRK,BRANCH_BMT,BRANCH_KRC,BRANCH_ELD rift;
+    class BRANCH_MSM,BRANCH_LDN junction;
+    class BRANCH_MHR,BRANCH_KSI,BRANCH_KKM lake;
     class PRUNED_NYH,PRUNED_NKR,PRUNED_KRC pruneStyle;
+
+    %% Edge styles (by order of definition)
+    %% Highlands branches (orange)
+    linkStyle 0,1,2,14 stroke:#ea580c,stroke-width:2px;
+    %% Pruned edges (dashed red)
+    linkStyle 3,10,15 stroke:#dc2626,stroke-width:2px,stroke-dasharray:5 5;
+    %% Optimal path (bold green)
+    linkStyle 4,5,6,7,8,9 stroke:#16a34a,stroke-width:5px;
+    %% Other explored branches (rift red)
+    linkStyle 11,12,13,16,17,18,19,20,21 stroke:#b91c1c,stroke-width:2px;
 ```
 
 **Key Execution Observations:**
