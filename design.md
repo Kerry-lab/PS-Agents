@@ -330,6 +330,3 @@ $$\text{Total Cumulative Path Cost} = 92 + 64 + 56 + 24 + 75 + 45 = 356\text{ km
 | **Option C (South-Western Path)** | `Nairobi → Narok → Bomet → Kisii → Kisumu` | $400\text{ km}$ | Suboptimal ($+44\text{ km}$) |
 | **Option D (Northern Corridor)** | `Nairobi → Naivasha → Nakuru → Eldoret → Kakamega → Kisumu` | $456\text{ km}$ | Suboptimal ($+100\text{ km}$) |
 
-### Final Verification
-Because Uniform Cost Search is optimal when all step costs are strictly non-negative ($c(s, a, s') \ge 0$), popping **Kisumu** from the priority queue at **$356\text{ km}$** guarantees that no other unexpanded or alternative path in the graph can yield a shorter distance.
-
